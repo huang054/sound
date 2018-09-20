@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="agent-mobile  theme-w theme-wred">
+
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="stylesheet" type="text/css" th:href="@{../static/css/lib.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{../static/css/style.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{../static/css/demo.5486.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{../static/css/wred.css}">
+
+		<script type="text/javascript" th:src="@{../static/js/jquery-3.2.1.js}"></script>
+		<title>资讯详情</title>
+	</head>
+
+	<body>
+		<div id="bodymask"></div>
+		<div id="sitecontent" style="overflow:hidden;">
+			<div class="npagePage post">
+				<div class="content">
+					<div class="mlistpost news module">
+						<div class="module_container">
+							<div class="container_content">
+								<div class="content_wrapper">
+									<div id="postWrapper">
+										<div id="postInfo">
+												<h2><p class="title" th:text="${resp.data.title}"></p></h2>
+												<p class="tomtop">&nbsp;</p>								
+											<p class="subtitle" th:text="${resp.data.authorName}+'  '+${#dates.format(resp.data.createTime,'yyyy-MM-dd HH:mm')}"></p>
+											<p class="tomtop">&nbsp;</p>
+											<p><img th:src="'http://p81lqfddq.bkt.clouddn.com/'+${resp.data.coverURL}" /></p>
+											<div class="description">
+												
+											</div>
+
+										</div>
+										<div id="postContent">
+											<div class="postbody">
+												<p th:text="${resp.data.content}"></p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

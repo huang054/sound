@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mapper.EventMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.Event">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="context" property="context" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="event_time" property="eventTime" jdbcType="TIMESTAMP"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="author_name" property="authorName" jdbcType="VARCHAR"/>
+        <result column="context_url" property="contextUrl" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="is_recommended" property="isRecommended" jdbcType="BIT"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="show_status" property="showStatus" jdbcType="BIT"/>
+    </resultMap>
+
+    <select id="findActivityList" resultType="com.vo.ActivityInfoVo">
+        SELECT
+            id as activityId,
+            title as title,
+            phone as phoneNumber,
+            author_name as contact,
+            show_status as showStatus
+        FROM
+            `event`
+        ORDER BY
+            create_time DESC
+    </select>
+</mapper>

@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: sound-admin
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://47.106.148.243:3306/sound?characterEncoding=utf-8&useSSL=false
+    username: kfsound
+    password: zkgx1234
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1765000
+      connection-init-sql: 'set names utf8mb4;'
+  redis:
+    host: 47.106.206.86
+    port: 6379
+    password: 6xU7xDTxq93B
+    timeout: 5000
+    database: 2
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /sound-admin
+
+file:
+  local:
+    cache: /root/cache
+
+logging:
+  level:
+    com.dao.mapper: DEBUG
+    ROOT: info
+  config: classpath:logback-springboot.xml
+
+mybatis:
+  type-aliases-package: com.dao.model
+  mapper-locations: classpath*:mapper/*Mapper.xml
+#    configLocation: classpath:config/mybatis/mybatis-config.xml
+
+mapper:
+  mappers:
+  - com.dao.util.MyMapper
+  not-empty: false
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  offset-as-page-num: true

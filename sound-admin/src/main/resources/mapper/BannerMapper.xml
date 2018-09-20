@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.mapper.BannerMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.Banner">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="banner_pic_url" jdbcType="VARCHAR" property="bannerPicUrl"/>
+        <result column="banner_url" jdbcType="VARCHAR" property="bannerUrl"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="show_status" jdbcType="BIT" property="showStatus"/>
+        <result column="banner_name" jdbcType="VARCHAR" property="bannerName"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="show_area" jdbcType="INTEGER" property="showArea"/>
+    </resultMap>
+    <select id="findBanners" resultType="com.vo.BannerInfoVo">
+        SELECT
+        id as bannerId,
+        banner_pic_url as imgUrl,
+        banner_url as linkUrl,
+        show_status as showStatus,
+        banner_name as bannerName,
+        sort as sort
+        FROM
+        banner
+        <where>
+            <if test="bannerActivityName != null and bannerActivityName !=''">
+                banner_name = #{bannerActivityName}
+            </if>
+            <if test="bannerActivityStatus != null and bannerActivityStatus !=0">
+                AND show_status = #{bannerActivityStatus}
+            </if>
+            AND show_area = #{showArea}
+        </where>
+        ORDER BY sort desc,create_time desc
+    </select>
+</mapper>

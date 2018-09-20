@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.mapper.AudioMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.Audio">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="album_name" jdbcType="VARCHAR" property="albumName"/>
+        <result column="author_id" jdbcType="BIGINT" property="authorId"/>
+        <result column="author_name" jdbcType="VARCHAR" property="authorName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="durantion_sec" jdbcType="BIGINT" property="durantionSec"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_size" jdbcType="BIGINT" property="fileSize"/>
+        <result column="filepath" jdbcType="VARCHAR" property="filepath"/>
+        <result column="is_local" jdbcType="BIT" property="isLocal"/>
+        <result column="is_road_show" jdbcType="INTEGER" property="isRoadShow"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+        <result column="md5" jdbcType="VARCHAR" property="md5"/>
+        <result column="play_count" jdbcType="BIGINT" property="playCount"/>
+        <result column="praise_count" jdbcType="BIGINT" property="praiseCount"/>
+        <result column="read_count" jdbcType="BIGINT" property="readCount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="road_show" jdbcType="INTEGER" property="roadShow"/>
+        <result column="tag_id" jdbcType="BIGINT" property="tagId"/>
+        <result column="ticket" jdbcType="VARCHAR" property="ticket"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="pic_url" jdbcType="VARCHAR" property="picUrl"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="album_id" jdbcType="BIGINT" property="albumId"/>
+        <result column="big_album_id" jdbcType="BIGINT" property="bigAlbumId"/>
+        <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
+        <result column="show_status" jdbcType="BIT" property="showStatus"/>
+    </resultMap>
+
+    <select id="findAudios" resultType="com.vo.AudioInfoVo">
+        SELECT
+        a.id AS audioId,
+        a.title AS title,
+        a.author_name AS authorName,
+        a.road_show AS recommendLevel,
+        a.album_id AS albumId,
+        a.album_name AS albumName,
+        a.show_status AS showStatus,
+        a.read_count AS readCount
+        FROM
+        audio AS a
+        WHERE
+        a.is_road_show = #{showArea}
+        <if test="showStatus !=null">
+            AND a.show_status = #{showStatus}
+        </if>
+        <if test="audioName !=null and  audioName !=''">
+            AND a.title = #{audioName}
+        </if>
+    </select>
+
+    <select id="findAudiosByAlbumIds" resultType="com.vo.AudioInfoVo">
+        SELECT
+        a.id AS audioId,
+        a.title AS title,
+        a.author_name AS authorName,
+        a.road_show AS recommendLevel,
+        a.album_id AS albumId,
+        a.album_name AS albumName,
+        a.show_status AS showStatus,
+        a.read_count AS readCount
+        FROM
+        audio AS a
+        WHERE
+        a.album_id in
+        <foreach collection="albumIds" close="(" separator="," open=")" item="item" index="index">
+            #{item}
+        </foreach>
+        <if test="showStatus !=null">
+            AND a.show_status = #{showStatus}
+        </if>
+        <if test="audioName !=null and  audioName !=''">
+            AND a.title = #{audioName}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,47 @@
+﻿[
+    {
+        "id": 1,
+        "name": "海藻1",
+        "phone": "17802927501",
+        "statu":"在使用",
+        "onoff":"on",
+        "creattime": "2018-4-21",
+        "version": "1.1.1"
+    },
+    {
+        "id": 2,
+        "name": "海藻2",
+        "phone": "17802927502",
+        "statu":"在使用",
+        "onoff":"on",
+        "creattime": "2018-4-22",
+        "version": "1.1.1"
+    },
+    {
+        "id": 3,
+        "name": "海藻2",
+        "phone": "17802927503",
+        "statu":"在使用",
+        "onoff":"on",
+        "creattime": "2018-4-23",
+        "version": "1.1.1"
+    },
+    {
+        "id": 4,
+        "name": "海藻4",
+        "phone": "17802927501",
+        "statu":"在使用",
+        "onoff":"on",
+        "creattime": "2018-4-24",
+        "version": "1.1.1"
+    },
+    {
+        "id": 5,
+        "name": "海藻5",
+        "phone": "17802927505",
+        "statu":"在使用",
+        "onoff":"on",
+        "creattime": "2018-4-21",
+        "version": "1.1.1"
+    }
+]

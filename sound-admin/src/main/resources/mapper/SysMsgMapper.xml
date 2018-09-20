@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mapper.SysMsgMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.SysMsg">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="img_name" property="imgName" jdbcType="VARCHAR"/>
+        <result column="imgurl" property="imgurl" jdbcType="VARCHAR"/>
+        <result column="isable" property="isable" jdbcType="BIT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="show_status" property="showStatus" jdbcType="BIT"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <select id="findSystemMsgList" resultType="com.vo.SystemMsgInfoVo">
+        SELECT
+            id as systemMsgId,
+            create_time as releaseTime,
+            title as title,
+            show_status as showStatus
+        FROM
+            sys_msg
+        ORDER BY
+            create_time DESC
+    </select>
+</mapper>

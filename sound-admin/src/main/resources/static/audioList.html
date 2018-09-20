@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Bootstrap 实例 - 折叠面板</title>
+		<link rel="stylesheet" href="css/fileinput.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-select2.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+		<link rel="stylesheet" href="css/validation.css" />
+		<script src="js/jquery-2.1.0.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+		<script src="js/audiolist.js" type="text/javascript"></script>
+		<script src="js/fileinput.js"></script>
+		<script src="js/bootstrap-select2.min.js"></script>
+		<script src="js/jquery.pagination.js"></script>
+		<script src="js/zh.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+		<script type="text/javascript">
+			$.validator.setDefaults({
+				submitHandler: function() {
+					$("#addAudio").click(function() {
+
+						var arr = $("#selectTag option:selected");
+						var temp = new Array();
+					//	var tagId=new Array();
+						for(var i = 0; i < arr.length; i++) {
+							temp[i] = $(arr[i]).text();
+						//	tagId[i] = $(arr[i]).val();
+						}
+						var b = temp.join(",");
+					//	var t=tagId.join(",");
+						/*alert($("#title").val()+"title");
+						alert($("#selectAlbum option:selected").text()+"album");
+						alert($("#author").val()+"author");
+						alert(b+"b");
+						alert($("#fileName1").val()+"fileName1");
+						alert($("#isCacheLocal1").val()+"islocal");
+						alert($("md51").val()+"md5");
+						alert($("#durantionSec").val()+"durantionSec");*/
+						
+						//alert($("#key1").val());
+						var obj = {
+							"title": $("#title").val(),
+							"albumName": $("#selectAlbum option:selected").text(),
+							"authorName": $("#author").val(),
+							"label": b,
+							"albumId": $("#selectAlbum").val(),
+							"filepath": $("#key1").val(),
+							"fileName": $("#fileName1").val(),
+							"isLocal": $("#isCacheLocal1").val(),
+							"md5": $("#md51").val(),
+							"tagId":1,
+							"priority":0,
+							"readCount":0,
+							"praiseCount":0,
+							"remark":"",
+							"fileSize":0,
+							"playCount":0,
+							"ticket":"",
+							"durantionSec":$("#durantionSec").val()
+						}
+					//	alert(b);
+						$.ajax({
+							async: false,
+							type: "post",
+							url: "/audio/save",
+							dataType: "json",
+							data: obj,
+							success: function(response) {
+								//alert(response.msg);
+								//console.log(response.msg);
+							}
+						});
+						window.location.reload();
+					});
+				}
+			});
+			$(document).ready(function() {
+				// 在键盘按下并释放及提交后验证提交表单
+				$("#defaultForm").validate({
+					rules: {
+						firstname: "required",
+						lastname: "required",
+						title: {
+							required: true,
+							minlength: 2
+						},
+						authorName: {
+							required: true,
+							minlength: 2
+						},
+					},
+					messages: {
+						firstname: "请输入标题",
+						title: {
+							required: "请输入标题",
+						},
+						firstname: "请输入节目作者",
+						authorName: {
+							required: "请输入节目作者",
+						},
+					}
+				})
+				var itemHTML;
+				$.ajax({
+					async: false,
+					url: "/audio/findByPage",
+					type: "get",
+					data: {
+						size: 6, //我把行数传回给服务器中
+						page: 0 //显示第一页的数据
+					},
+					dataType: "json",
+					success: function(result) {
+						//console.log(result);
+						sumCount = result.data.totalElements;
+						count = result.data.pageable.pageSize;
+						$.each(result.data.content, function(index, element) {
+							var unixTimestamp = new Date(element.createTime);
+							commonTime = unixTimestamp.toLocaleString();
+							itemHTML = "<tr>" +
+								"<td>" +
+								"<input type='checkbox' name='item' value=" + element.id + ">" +
+								"</td>" +
+								"<td>" +
+								element.title +
+								"</td>" +
+								"<td>" +
+								element.albumName +
+								"</td>" +
+								"<td>" +
+								element.authorName +
+								"</td>" +
+								"<td>" +
+								"<select class='form-control'>" +
+								"<option value='0'>不推荐</option>" +
+								"<option value='1' >类型推荐</option>" +
+								"<option value='2' >置顶推荐</option>" +
+								"</select>" +
+								"</td>" +
+								"<td>" +
+								commonTime +
+								"</td>" +
+								"<td>" +
+								element.praiseCount +
+								"</td>" +
+								"<td>" +
+								element.readCount +
+								"</td>" +
+								"</td>" +
+								"<td>" +
+								"<a class='btn btn-primary' data-toggle='modal' data-target='#tagList'>" +
+								"点击查看" +
+								"</a>" +
+								"<input type='hidden' class='form-control' id='tag' value=" + element.label + " />" +
+								"</td>" +
+								"<td>" +
+								element.durantionSec +
+								"</td>" +
+								"<td>" +
+								"<input type='hidden'  class='hid' value=" + element.id + ">" +
+								"<input type='button' name='delete' value='删除' class='btn btn-danger'onclick=\"deleteById('" + element.id + "')\"/>&nbsp;" +
+								"<input type='button' name='change' value='修改' class='btn btn-info' data-toggle='modal' data-target='#mytypechange'onclick=\"getSeatingCarMark('" + element.id + "')\"/>&nbsp;" +
+								"<input type='hidden'  class='hid' value=" + element.reco + ">" +
+								"<input type='hidden' class='form-control' id='minImage' value=" + element.filepath + " />" +
+								"<input type='hidden' class='form-control' id='priority_value' value=" + element.priority + " />" +
+								"</td>" +
+								"</<tr>";
+							$("#listTable").append(itemHTML);
+							switch(parseInt(element.priority)) {
+								case 0:
+									$("#listTable tr:last-child td option").eq(0).attr("selected", "selected"); //不推荐
+									break;
+								case 1:
+									$("#listTable tr:last-child td option").eq(1).attr("selected", "selected"); //类型
+									break;
+								case 2:
+									$("#listTable tr:last-child td option").eq(2).attr("selected", "selected"); //置顶
+									break;
+								default:
+									$("#priority option").eq(0).attr("selected", "selected"); //默认不推荐
+									break;
+							}
+
+						});
+
+						itemHTML = "";
+						var pageCount = Math.ceil(sumCount / count); //这里50除以10等于5，所以一共有5页
+						$('.M-box').pagination({
+							pageCount: pageCount,
+							jump: true,
+							coping: true,
+							homePage: '首页',
+							endPage: '末页',
+							prevContent: '上页',
+							nextContent: '下页',
+							callback: function(api) {
+								console.log(result);
+								$.ajax({
+									url: "/audio/findByPage",
+									type: "get",
+									data: {
+										size: 6, //依然显示10条数据
+										page: api.getCurrent() - 1 // 非常关键的一步，这里就要用到api接口的方法中获取当前页
+									},
+									dataType: "json",
+									success: function(result) {
+										var itemHTML1;
+										$.each(result.data.content, function(index, element) {
+											var unixTimestamp = new Date(element.createTime);
+											commonTime = unixTimestamp.toLocaleString();
+											itemHTML1 += "<tr>" +
+												"<td>" +
+												"<input type='checkbox' name='item' value=" + element.id + ">" +
+												"</td>" +
+												"<td>" +
+												element.title +
+												"</td>" +
+												"<td>" +
+												element.albumName +
+												"</td>" +
+												"<td>" +
+												element.authorName +
+												"</td>" +
+												"<td>" +
+												"<select class='form-control'>" +
+												"<option value='0'>不推荐</option>" +
+												"<option value='1' >类型推荐</option>" +
+												"<option value='2' >置顶推荐</option>" +
+												"</select>" +
+												"</td>" +
+												"<td>" +
+												commonTime +
+												"</td>" +
+												"<td>" +
+												element.praiseCount +
+												"</td>" +
+												"<td>" +
+												element.readCount +
+												"</td>" +
+												"</td>" +
+												"<td>" +
+												"<a class='btn btn-primary' data-toggle='modal' data-target='#tagList'>" +
+												"点击查看" +
+												"</a>" +
+												"<input type='hidden' class='form-control' id='tag' value=" + element.label + " />" +
+												"</td>" +
+												"<td>" +
+												element.durantionSec +
+												"</td>" +
+												"<td>" +
+												"<input type='hidden'  class='hid' value=" + element.id + ">" +
+												"<input type='button' name='delete' value='删除' class='btn btn-danger'/>&nbsp;" +
+												"<input type='button' name='change' value='修改' class='btn btn-info' data-toggle='modal' data-target='#mytypechange'/>&nbsp;" +
+												"<input type='hidden'  class='hid' value=" + element.reco + ">" +
+												"<input type='hidden' class='form-control' id='minImage' value=" + element.filepath + " />" +
+												"<input type='hidden' class='form-control' id='priority_value' value=" + element.priority + " />" +
+												"</td>" +
+												"</<tr>";
+											$("#listTable").html(itemHTML1);
+											switch(parseInt(element.priority)) {
+												case 0:
+													$("#listTable tr:last-child td option").eq(0).attr("selected", "selected"); //不推荐
+													break;
+												case 1:
+													$("#listTable tr:last-child td option").eq(1).attr("selected", "selected"); //类型
+													break;
+												case 2:
+													$("#listTable tr:last-child td option").eq(2).attr("selected", "selected"); //置顶
+													break;
+												default:
+													$("#priority option").eq(0).attr("selected", "selected"); //默认不推荐
+													break;
+											}
+
+										});
+									}
+								});
+							}
+						});
+					}
+				});
+				/*标签绑定
+				 */
+				var dd1 = $("#tagListTable");
+				$("a").click(function() {
+					$("#tagListTable").empty();
+					var tag = $(this).next().val();
+					if(tag != null) {
+
+						var tags = tag.split(",");
+						for(var i = 0; i < tags.length; i++) {
+							var htmls = "<button type='button' class='btn btn-default btn-sm'>" +
+								"<span class='glyphicon glyphicon-tag'>" + tags[i] + "</span>" +
+								"</button>";
+							dd1.append(htmls);
+						}
+					}
+				})
+				//添加
+				//	addAudio();
+				//修改
+				upAudio();
+			});
+
+			function getSeatingCarMark(element) {
+				$.ajax({
+					"url": "/audio/findById?id=" + element,
+					"type": "get",
+					"dataType": "json",
+					"success": function(result) {
+						DisplayListItems(result);
+					},
+					"error": function() {
+						alert("出现错误！");
+					}
+				});
+
+				function DisplayListItems(result) {
+					$("#id").val(result.data.id);
+					$("#titlec").val(result.data.title);
+					$("#selectAlbum").val(result.data.albumName);
+					$("#authorc").val(result.data.author);
+					$("#selectTag2").val(result.data.label);
+				}
+			};
+
+			function deleteById(element) {
+				$.confirm({
+					title: '警告',
+					content: '您是否要删除此条数据?',
+					type: 'red',
+					typeAnimated: true,
+					buttons: {
+						tryAgain: {
+							text: '确定',
+							btnClass: 'btn-red',
+							action: function() {
+								$.ajax({
+									"url": "/audio/deleteById?id=" + element,
+									"type": "get",
+									"dataType": "json",
+									success: function(response) {
+										var dd1 = $(this).parent(); //列表框id
+										dd1.hide();
+										dd1.remove();
+										window.location.reload();
+
+									}
+								});
+							}
+						},
+						close: function() {
+							text: '取消'
+						}
+					}
+				});
+			};
+
+			/**
+			 * 修改推荐级别
+			 */
+			$(document).ready(function() {
+				$("select").change(function() {
+					var priority = $(this).find("option:selected").val();
+					var id = $(this).parent().parent().children("td").eq(0).children().val();
+					var title = $(this).parent().parent().children("td").eq(1).text();
+					var filepath = $(this).parent().parent().children("td").eq(9).children().eq(4).val();
+					var label = $(this).parent().parent().children("td").eq(8).text();
+					var authorName = $(this).parent().parent().children("td").eq(3).text();
+					var durantionSec =$(this).parent().parent().children("td").eq(9).text();
+
+					$.ajax({
+						type: "post",
+						url: "/audio/updatePriority",
+						dataType: "json",
+						data: {
+							"id": id,
+							"title": title,
+							"priority": priority,
+							"filepath": filepath,
+							"label": label,
+							"authorName": authorName,
+							"albumId": "1",
+							"albumName": "专辑",
+							"tagId": "1",
+							"durantionSec": durantionSec
+						},
+						success: function(response) {
+							if(response.code == "000000") {};
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<table class="table table-hover table-bordered" id="mytable1">
+			<thead>
+				<tr>
+					<th>选中</th>
+					<th>节目标题</th>
+					<th>专辑名称</th>
+					<th>栏目作者</th>
+					<th>推荐级别</th>
+					<th>创建时间</th>
+					<th>点赞数</th>
+					<th>阅读数</th>
+					<th>所属标签名称</th>
+					<th>节目时长</th>
+					<th>操作</th>
+				</tr>
+				<tr>
+					<td><input type="checkbox" onclick="checkAll(this)" /></td>
+					<td colspan="3">
+						<a href="avascript:void(0)" class="btn btn-danger" role="button" id="delall">全部删除</a>
+					</td>
+					<td>
+						<select class="form-control" id="priority" style="color: #008000;">
+							<option value="-1" selected="selected">请选择</option>
+							<option value="0" style="color: #C9302C">不推荐</option>
+							<option value="1">类型推荐</option>
+							<option value="2">置顶推荐</option>
+
+						</select>
+					</td>
+					<td colspan="5"></td>
+					<td>
+
+						<button class="btn btn-primary" data-toggle="modal" data-target="#mytype">
+							添加
+						</button>
+					</td>
+				</tr>
+			</thead>
+			<tbody id="listTable">
+			</tbody>
+		</table>
+		<div class="M-box"></div>
+
+		<div class="modal fade bs-example-modal-lg" id="mytype" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+						<h3 class="modal-title" id="myModalLabel">
+					添加节目
+						</h3>
+					</div>
+					<div class="modal-body">
+						<form id="defaultForm">
+							<table class="table table-hover table-bordered" id="mytable2">
+								<tr>
+									<th>节目标题</th>
+									<td><input type="text" name="title" class="form-control" id="title" /></td>
+								</tr>
+								<tr>
+									<th>节目所属专辑</th>
+									<td>
+										<select class="form-control" id="selectAlbum">
+
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<th>节目作者</th>
+									<td><input type="text" name="authorName" class="form-control" id="author" /></td>
+								</tr>
+								<tr>
+									<th>所属标签</th>
+									<td>
+										<div class="form-group">
+											<select id="selectTag" class="selectpicker" multiple data-max-options="10"></select>
+											<div id="selectBoxc">
+											</div>
+										</div>
+									</td>
+								</tr>
+
+								<tr>
+									<th>节目音频</th>
+									<td>
+										<input id="file1" name="file" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1" />
+										<input id="key1" name="filepath" type="hidden" />
+										<input id="fileName1" type="hidden" />
+										<input id="md51" type="hidden" />
+										<input id="isCacheLocal1" type="hidden" />
+										<input id="durantionSec" type="hidden" />
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan="2">
+										<input type="reset" value="重置" class="btn btn-primary" id="reset" />
+										<input type="submit" value="添加" class="btn btn-success" id="addAudio" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<div class="modal fade bs-example-modal-lg" id="mytypechange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h3 class="modal-title">
+							修改节目
+						</h3>
+					</div>
+					<div class="modal-body">
+						<form>
+							<table class="table table-hover table-bordered">
+								<tr>
+									<th>节目标题</th>
+									<td><input type="text" name="" class="form-control" id="titlec" />
+										<input type="hidden" value="1" id="id">
+									</td>
+								</tr>
+								<tr>
+			  						<th>节目所属专辑</th>
+									<td>
+										<select class="form-control" id="selectAlbum2">
+
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th>节目作者</th>
+									<td><input type="text" name="" class="form-control" id="authorc" /></td>
+								</tr>
+								<tr>
+									<th>所属标签</th>
+									<td>
+										<div class="form-group">
+											<select id="selectTag2" multiple data-max-options="10"></select>
+											<div id="selectBoxc">
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>节目音频</th>
+									<td>
+										<input id="filec" name="file" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1" />
+										<input id="key2" name="filepath" type="hidden" />
+										<input id="fileName2" type="hidden" />
+										<input id="md52" type="hidden" />
+										<input id="isCacheLocal2" type="hidden" />
+										<input id="durantionSec2" type="hidden" />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="reset" value="重置" class="btn btn-primary" id="resetc" />
+										<input type="button" value="修改" class="btn btn-success" id="upAudio" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<!--
+            	作者：offline
+            	时间：2018-05-08
+            	描述：标签
+            -->
+		<div class="modal fade bs-example-modal-lg" id="tagList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+						</button>
+						<h3 class="modal-title" id="myModalLabel">
+					标签列表
+						</h3>
+					</div>
+					<div class="modal-body" id="tagListTable">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+							</button>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-lg" id="tagList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+						</button>
+						<h3 class="modal-title" id="">
+					标签列表
+						</h3>
+					</div>
+					<div class="modal-body" id="tagListTable">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+							</button>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+		</div>
+	</body>
+
+</html>

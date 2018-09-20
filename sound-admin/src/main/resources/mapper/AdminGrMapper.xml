@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mapper.AdminGrMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.AdminGr">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="GID" property="gid" jdbcType="BIGINT"/>
+        <result column="RID" property="rid" jdbcType="BIGINT"/>
+    </resultMap>
+
+
+    <delete id="deleteRoleRec">
+        DELETE FROM admin_gr WHERE GID = #{gId} and RID in
+        <foreach collection="deleteRec" separator="," open="(" item="itm" index="index" close=")">
+            #{itm}
+        </foreach>
+    </delete>
+
+    <insert id="insertRoleRec">
+        INSERT INTO admin_gr(`GID`, `RID`) VALUES
+        <foreach collection="addRec" index="index" item="itm" open="(" separator="," close=")">
+            #{gId},#{itm}
+        </foreach>
+    </insert>
+</mapper>

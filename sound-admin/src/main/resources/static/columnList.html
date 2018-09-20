@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>栏目</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/fileinput.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+		<script src="js/jquery-2.1.0.min.js"></script>
+		<script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/columnlist.js" type="text/javascript"></script>
+		<script src="js/fileinput.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+	</head>
+
+	<body scroll="no">
+		<table class="table table-hover table-bordered" id="mytable1">
+			<thead>
+				<tr>
+					<th>选中</th>
+					<th>栏目名称</th>
+					<th>操作</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" onclick="checkAll(this)" />
+					</td>
+					<td>
+					</td>
+					<td>
+						<a href="javascript:void(0)" class="btn btn-danger" role="button" id="delall">全部删除</a>
+						<button class="btn btn-primary" data-toggle="modal" data-target="#mytype">
+							添加
+						</button>
+					</td>
+				</tr>
+			</thead>
+			<tbody id="listTable">
+
+			</tbody>
+		</table>
+		<div class="container" id="page2">
+			<ul class="pagination">
+				<li>
+					<a href="javascript:void(0)" id="homePage">首页</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="preciousPage">上一页</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="precious">...</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="now">1</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="next">...</a>
+				</li>
+				<li>
+					<input type="hidden" value="" id="nextPageval">
+					<a href="javascript:void(0)" id="nextPage">下一页</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="trailerPage">尾页</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="modal fade bs-example-modal-lg" id="mytype" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h3 class="modal-title" id="myModalLabel">
+							资讯栏目添加
+						</h3>
+					</div>
+					<div class="modal-body">
+						<form>
+							<table class="table table-hover table-bordered" id="mytable2">
+								<tr>
+									<th>栏目名称</th>
+									<td><input type="text" name="colum" class="form-control" id="name" /><p style="color: red" id="column"></p></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="reset" value="重置" class="btn btn-primary" id="reset" />
+										<input type="button" value="提交" class="btn btn-success" id="add" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+		<div class="modal fade bs-example-modal-lg" id="mytypechange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h3 class="modal-title" id="myModalLabelc">
+							资讯栏目添加
+						</h3>
+					</div>
+					<div class="modal-body">
+						<form>
+							<table class="table table-hover table-bordered" id="mytablec">
+								<tr>
+									<th>栏目名称</th>
+									<td><input type="text" name="" class="form-control" id="namec" />
+										<input type="hidden" name="" class="form-control" id="idc" />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="reset" value="重置" class="btn btn-primary" id="resetc" />
+										<input type="button" value="提交" class="btn btn-success" id="change" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</body>
+
+</html>

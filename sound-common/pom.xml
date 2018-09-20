@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>sound</artifactId>
+		<groupId>sound</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>sound</groupId>
+	<artifactId>sound-common</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<!--<packaging>pom</packaging> -->
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- JPA Data (We are going to use Repositories, Entities, Hibernate, etc...) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!--Use MySQL Connector-J -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!--<dependency> -->
+		<!--<groupId>org.springframework.boot</groupId> -->
+		<!--<artifactId>spring-boot-starter-data-redis</artifactId> -->
+		<!--</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
+		</dependency>
+		<!--七牛 sdk -->
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>[7.2.0, 7.2.99]</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>swagger-bootstrap-ui</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org</groupId>
+			<artifactId>jaudiotagger</artifactId>
+			<version>2.0.3</version>
+		</dependency>
+	</dependencies>
+
+
+	<!--<build> -->
+	<!--<plugins> -->
+	<!--<plugin> -->
+	<!--&lt;!&ndash;该插件主要用途：构建可执行的JAR &ndash;&gt; -->
+	<!--<groupId>org.springframework.boot</groupId> -->
+	<!--<artifactId>spring-boot-maven-plugin</artifactId> -->
+	<!--</plugin> -->
+	<!--</plugins> -->
+	<!--</build> -->
+	<!--<build> -->
+	<!--<plugins> -->
+	<!--<plugin> -->
+	<!--<groupId>org.springframework.boot</groupId> -->
+	<!--<artifactId>spring-boot-maven-plugin</artifactId> -->
+	<!--</plugin> -->
+	<!--&lt;!&ndash;<plugin>&ndash;&gt; -->
+	<!--&lt;!&ndash;<groupId>org.apache.maven.plugins</groupId>&ndash;&gt; -->
+	<!--&lt;!&ndash;<artifactId>maven-jar-plugin</artifactId>&ndash;&gt; -->
+	<!--&lt;!&ndash;<version>2.4</version>&ndash;&gt; -->
+	<!--&lt;!&ndash;<configuration>&ndash;&gt; -->
+	<!--&lt;!&ndash;<archive>&ndash;&gt; -->
+	<!--&lt;!&ndash;<manifest>&ndash;&gt; -->
+	<!--&lt;!&ndash;<addClasspath>true</addClasspath>&ndash;&gt; -->
+	<!--&lt;!&ndash;<classpathPrefix>lib/</classpathPrefix>&ndash;&gt; -->
+	<!--&lt;!&ndash;<mainClass>com.sound.Application</mainClass>&ndash;&gt; -->
+	<!--&lt;!&ndash;</manifest>&ndash;&gt; -->
+	<!--&lt;!&ndash;</archive>&ndash;&gt; -->
+	<!--&lt;!&ndash;</configuration>&ndash;&gt; -->
+	<!--&lt;!&ndash;</plugin>&ndash;&gt; -->
+	<!--</plugins> -->
+	<!--<resources> -->
+	<!--<resource> -->
+	<!--<directory>src/lib</directory> -->
+	<!--<targetPath>BOOT-INF/lib/</targetPath> -->
+	<!--<includes> -->
+	<!--<include>**/*.jar</include> -->
+	<!--</includes> -->
+	<!--</resource> -->
+	<!--<resource> -->
+	<!--<directory>src/main/resources</directory> -->
+	<!--<targetPath>BOOT-INF/classes/</targetPath> -->
+	<!--</resource> -->
+	<!--</resources> -->
+	<!--</build> -->
+
+</project>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>海藻FM后台管理系统</title>
+		<link rel="stylesheet" href="../static/css/fileinput.css" />
+		<link rel="stylesheet" href="../static/css/index.css" />
+
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+		<script src="../static/js/jquery-2.1.0.min.js"></script>
+		<script src="../static/js/fileinput.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#logout").click(function() {
+					if(confirm('系统提示，您确定要退出本次登录吗?')) {
+						$.ajax({
+							url: "/userShiro/logout", //请求地址
+							type: "get", //提交的方式
+							dataType: "json", //返回类型 TEXT字符串 JSON XML
+							success: function() {
+								alert("退出成功");
+							}
+						})
+					}
+				})
+			});
+		</script>
+	</head>
+
+	<body style="overflow:Scroll;overflow-y:hidden">
+		<!--
+        	作者：offline
+        	时间：2018-04-21
+        	描述：头部导航
+        -->
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding-left:100px">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">云音响后台</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="javascript:void(0)">导航</a>
+					</li>
+				</ul>
+				<li>
+					<button type="button" id="logout">退出</button>
+				</li>
+			</div>
+
+		</nav>
+		<span class="blank" style="height:60px;"></span>
+		<!--
+	作者：offline
+	时间：2018-04-21
+	描述：导航栏内容
+-->
+		<div id="left" class="left">
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+					用户管理
+						</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="menu-item" href="#user" data-toggle="tab">
+								－设备用户
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+					设备管理
+				</a>
+			</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="menu-item" href="#status" data-toggle="tab">
+								－设备状态
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseThree">
+					频道管理
+				</a>
+						</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="menu-item" href="#bigType" data-toggle="tab">
+								－大类型
+							</div>
+							<div class="menu-item" href="#type" data-toggle="tab">
+								－类型
+							</div>
+							<div class="menu-item" href="#album" data-toggle="tab">
+								－专辑
+							</div>
+							<div class="menu-item" href="#audio" data-toggle="tab">
+								－节目
+							</div>
+							<div class="menu-item" href="#tag" data-toggle="tab">
+								－标签
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--<img src="http://p81lqfddq.bkt.clouddn.com/FqQ35lWD2QLgoJwVIJHzyjlLNter">-->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+					资讯管理
+						</a>
+						</h4>
+					</div>
+					<div id="collapseFour" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="menu-item" href="#column" data-toggle="tab">
+								－栏目
+							</div>
+							<div class="menu-item" href="#news" data-toggle="tab">
+								－资讯
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseFive">
+					系统管理
+				</a>
+			</h4>
+					</div>
+					<div id="collapseFive" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="menu-item" href="#systeminfo" data-toggle="tab">
+								－系统消息
+							</div>
+							<div class="menu-item" href="#admin" data-toggle="tab">
+								－后台用户
+							</div>
+							<div class="menu-item" href="#deviceInfo" data-toggle="tab">
+								－设备参数
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="right" class="tab-content right">
+
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：app用户
+            -->
+			<div id="user" class="tab-pane ">
+				<object type="text/x-scriptlet" data="/static/userList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：设备状态
+            -->
+			<div id="status" class="tab-pane ">
+				<object type="text/x-scriptlet" data="/static/deviceList.html" style="width: 100%; height: 810px"></object>
+			</div>
+
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：大类型
+            -->
+			<div id="bigType" class="tab-pane ">
+				<object type="text/x-scriptlet" data="/static/bigTypeList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：类型
+            -->
+			<div id="type" class="tab-pane ">
+				<object type="text/x-scriptlet" data="/static/typeList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：专辑
+            -->
+			<div id="album" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/albumList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：节目
+            -->
+			<div id="audio" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/audioList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：标签
+            -->
+			<div id="tag" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/tagList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：栏目
+            -->
+			<div id="column" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/columnList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：资讯
+            -->
+			<div id="news" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/newsList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：系统消息
+            -->
+			<div id="systeminfo" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/systemList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-23
+            	描述：后台用户
+            -->
+			<div id="admin" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/adminList.html" style="width: 100%; height: 810px"></object>
+			</div>
+			<!--
+            	作者：offline
+            	时间：2018-04-280
+            	描述：设备参数信息
+            -->
+			<div id="deviceInfo" class="tab-pane">
+				<object type="text/x-scriptlet" data="/static/deviceEdit.html" style="width: 100%; height: 810px"></object>
+			</div>
+		</div>
+
+	</body>
+
+</html>

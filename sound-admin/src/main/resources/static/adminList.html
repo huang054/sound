@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Bootstrap 实例 - 折叠面板</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-select.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+		<script src="js/jquery-2.1.0.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+		<script src="js/adminlist.js" type="text/javascript"></script>
+		<script src="js/bootstrap-select.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+	</head>
+	<body>
+		<table class="table table-hover table-bordered" id="mytable1">
+					<thead>
+						<tr>
+							<th>选中</th>
+							<th>用户名称</th>
+							<th>用户密码</th>
+							<th>创建时间</th>
+							<th>操作的菜单</th>
+							<th>最后一次ip</th>
+							<th>预留字段</th>
+							<th>操作</th>
+						</tr>
+						<tr id="head">
+						</tr>
+					</thead>
+					<tbody id="listTable">
+
+					</tbody>
+				</table>
+				<div class="container" id="page2">
+					<ul class="pagination">
+						<li>
+							<a href="javascript:void(0)" id="homePage">首页</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" id="preciousPage">上一页</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" id="precious">...</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" id="now">1</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" id="next">...</a>
+						</li>
+						<li>
+							<input type="hidden" value="" id="nextPageval">
+							<a href="javascript:void(0)" id="nextPage">下一页</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" id="trailerPage">尾页</a>
+						</li>
+					</ul>
+				</div>
+				
+		<div class="modal fade bs-example-modal-lg" id="myadmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							添加管理员
+						</h4>
+					</div>
+					<div class="modal-body">
+						<h1>添加管理员</h1>
+						<form>
+							<table class="table table-hover table-bordered" id="mytable2">
+								<tr>
+									<th>管理员名称</th>
+									<td colspan="5"><input type="text" class="form-control" id="userName" /><p style="color: red" id="userNameNull"></p></td>
+								</tr>
+								<tr>
+									<th>用户密码</th>
+									<td colspan="5"><input type="text" class="form-control" id="passwd"/><p style="color: red"  id="passwdNull"></p></td>
+								</tr>
+								<!--<tr>
+									<th>类别</th>
+									<td colspan="5"><input type="text" class="form-control" id="type" /></td>
+								</tr>-->
+								<tr>
+									<th>操作的菜单</th>
+									<td>
+										<div class="form-group">
+											<select class="selectpicker" multiple data-max-options="10" id="a_tag">
+											</select><p style="color: red"  id="a_tagNull"></p>
+										</div>
+									</td>
+								</tr>
+								<!--<tr>-->
+									<!--<th>最后一次ip</th>-->
+									<!--<td colspan="5"><input type="text" class="form-control" id="lastIp" /></td>-->
+								<!--</tr>-->
+								<tr>
+									<th>预留字段</th>
+									<td colspan="5"><input type="text" class="form-control" id="ext"/><p style="color: red"  id="extNull"></p></td>
+								</tr>
+								<tr>
+									<th>预留字段</th>
+									<td colspan="5"><input type="text" class="form-control" id="ext1"/><p style="color: red"  id="extlNull"></p></td>
+								</tr>
+								<tr>
+									<td colspan="6">
+										<input type="reset" value="重置" class="btn btn-primary" id="reset"/>
+										<input type="button" value="提交" class="btn btn-success" id="add"/>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<div class="modal fade bs-example-modal-lg" id="myadminu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="width: 800px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title">
+							添加管理员
+						</h4>
+					</div>
+					<div class="modal-body">
+						<h1>添加管理员</h1>
+						<form>
+							<table class="table table-hover table-bordered" id="mytable">
+								<tr>
+									<th>管理员名称</th>
+									<td colspan="5">
+										<input type="hidden" id="id" value="">
+										<input type="text" class="form-control" id="userNameu" /></td>
+								</tr>
+								<tr>
+									<th>用户密码</th>
+									<td colspan="5"><input type="text" class="form-control" id="passwdu" /></td>
+								</tr>
+								<!--<tr>
+									<th>类别</th>
+									<td colspan="5"><input type="text" class="form-control" id="typeu" /></td>
+								</tr>-->
+                                <tr>
+                                    <th>所属标签</th>
+                                    <td>
+                                        <div class="form-group">
+                                            <select class="selectpicker" multiple data-max-options="10" id="u_tag">
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+								<tr>
+									<th>最后一次ip</th>
+									<td colspan="5"><input readonly type="text" class="form-control" id="lastIpu" /></td>
+								</tr>
+								<tr>
+									<th>预留字段</th>
+									<td colspan="5"><input type="text" class="form-control" id="extu" /></td>
+								</tr>
+								<tr>
+									<th>预留字段</th>
+									<td colspan="5"><input type="text" class="form-control" id="ext1u" /></td>
+								</tr>
+								<tr>
+									<td colspan="6">
+										<input type="reset" value="重置" class="btn btn-primary" id="resetu"/>
+										<input type="button" value="提交" class="btn btn-success" id="update"/>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+							</button>
+						</div>
+					</div>
+				<!-- /.modal-content -->
+				</div>
+			</div>
+	</body>
+
+</html>

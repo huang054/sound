@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>资讯评论详情</title>
+		<link href="css/bootstrap.css" rel="stylesheet" />
+		<link href="css/album.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+        <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+      	<link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#homePage").click(function(){
+           		alert("首页");
+				});
+				
+				 $("#preciousPage").click(function(){
+	           		alert("上一页");
+				});
+				
+				 $("#precious").click(function(){
+	           		alert("...");
+				});
+				
+				 $("#3").click(function(){
+	           		alert("3");
+				});
+				
+				 $("#4").click(function(){
+	           		alert("4");
+				});
+				
+				 $("#5").click(function(){
+	           		alert("5");
+				});
+				
+				 $("#next").click(function(){
+	           		alert("...");
+				});
+				
+				 $("#nextPage").click(function(){
+	           		alert("下一页");
+				});
+				
+				 $("trailerPage").click(function(){
+	           		alert("尾页");
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<table class="table table-hover table-bordered" id="mytable">
+    <thead>
+        <tr>
+            <th>选中</th>
+            <th>评论作者</th>
+            <th>评论详情</th>
+            <th>评论时间</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkAll(this)"/></td>
+            <td colspan="6"><a href="javascript:void(0)" class="btn btn-danger" role="button" onclick="delAll(this)">全部删除</a></td>
+        </tr>
+    </thead>
+    <tbody id="listTable">    
+        <tr>
+            <td><input type="checkbox" name="item" value="123"/></td>
+            <td>author</td>
+            <td>评论详情</td>
+            <td>1995-08-07</td>
+            <td>
+                <input type="hidden" class="hid" value="1">
+                <input type="button" name="" value="删除" class="btnd btn-danger" />
+            </td>
+        </tr>
+        
+       <tr>
+            <td><input type="checkbox" name="item" value="123"/></td>
+            <td>author</td>
+            <td>评论详情</td>
+            <td>1995-08-07</td>
+            <td>
+                <input type="hidden" class="hid" value="1">
+                <input type="button" name="" value="删除" class="btnd btn-danger" />
+            </td>
+        </tr>
+        
+        <tr>
+            <td><input type="checkbox" name="item" value="123"/></td>
+            <td>author</td>
+            <td>评论详情</td>
+            <td>1995-08-07</td>
+            <td>
+                <input type="hidden" class="hid" value="1">
+                <input type="button" name="" value="删除" class="btnd btn-danger" />
+            </td>
+        </tr>
+        
+        <tr>
+            <td><input type="checkbox" name="item" value="123"/></td>
+            <td>author</td>
+            <td>评论详情</td>
+            <td>1995-08-07</td>
+            <td>
+                <input type="hidden" class="hid" value="1">
+                <input type="button" name="" value="删除" class="btnd btn-danger" />
+            </td>
+        </tr>
+    </tbody>
+        </table>
+				<div class="container">
+            		<ul class="pagination">
+            		<li><a href="javascript:void(0)" id="homePage">首页</a></li>
+            		<li><a href="javascript:void(0)" id="preciousPage">上一页</a></li>
+            		<li><a href="javascript:void(0)" id="precious">...</a></li>
+            		<li><a href="javascript:void(0)" id="3">3</a></li>
+            		<li><a href="javascript:void(0)" id="4">4</a></li>
+            		<li><a href="javascript:void(0)" id="5">5</a></li>
+            		<li><a href="javascript:void(0)" id="next">...</a></li>
+            		<li><a href="javascript:void(0)" id="nextPage">下一页</a></li>
+            		<li><a href="javascript:void(0)" id="trailerPage">尾页</a></li>
+            		</ul>
+        		</div>	
+	</body>
+</html>

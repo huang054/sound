@@ -1,0 +1,23 @@
+﻿[
+    {
+        "id": 1,
+        "name": "海藻1",
+        "picture":"imag1.png",
+        "reco": 1,
+        "creattime": "2018-4-21"
+    },
+    {
+        "id": 2,
+        "name": "海藻2",
+        "picture":"imag1.png",
+        "reco":1,
+        "creattime": "2018-4-21"
+    },
+    {
+        "id": 3,
+        "name": "海藻3",
+        "picture":"imag1.png",
+        "reco":1,
+        "creattime": "2018-4-21"
+    }
+]

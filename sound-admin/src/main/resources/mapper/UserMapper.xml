@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="adress" property="adress" jdbcType="VARCHAR"/>
+        <result column="baidu_account" property="baiduAccount" jdbcType="VARCHAR"/>
+        <result column="bound_or_not" property="boundOrNot" jdbcType="BIT"/>
+        <result column="calculating_force_value" property="calculatingForceValue" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="head_file_name" property="headFileName" jdbcType="VARCHAR"/>
+        <result column="header_url" property="headerUrl" jdbcType="VARCHAR"/>
+        <result column="invite_user_id" property="inviteUserId" jdbcType="BIGINT"/>
+        <result column="is_follow" property="isFollow" jdbcType="BIT"/>
+        <result column="is_perfect_information" property="isPerfectInformation" jdbcType="BIT"/>
+        <result column="is_sign_in" property="isSignIn" jdbcType="BIT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="now_device_id" property="nowDeviceId" jdbcType="VARCHAR"/>
+        <result column="phone_num" property="phoneNum" jdbcType="VARCHAR"/>
+        <result column="push_sys_msg" property="pushSysMsg" jdbcType="BIT"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="sign_in_total" property="signInTotal" jdbcType="INTEGER"/>
+        <result column="the_first_few" property="theFirstFew" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="DECIMAL"/>
+        <result column="user_level" property="userLevel" jdbcType="BIT"/>
+        <result column="user_token" property="userToken" jdbcType="VARCHAR"/>
+        <result column="yesterday_is_sign_in" property="yesterdayIsSignIn" jdbcType="BIT"/>
+        <result column="yesterday_total" property="yesterdayTotal" jdbcType="DECIMAL"/>
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <select id="findUsers" resultType="com.vo.UserInfoVo">
+        SELECT
+        u.id as userId,
+        u.phone_num as phoneNumber,
+        u.`name` as userName,
+        u.user_level as sort,
+        u.baidu_account as baiduAccount
+        FROM
+        `user` AS u
+        <where>
+            <if test="userName != null and userName !='' ">
+                u.`name` = #{userName}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                AND u.phone_num = #{phoneNumber}
+            </if>
+        </where>
+
+    </select>
+</mapper>

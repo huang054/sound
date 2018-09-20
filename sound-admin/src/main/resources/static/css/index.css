@@ -1,0 +1,114 @@
+body {
+				margin: 0;
+				padding: 0;
+				font-family: Lato, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				line-height: 1.72222;
+				color: #34495e;
+				background-color: #fff;
+			}
+#tb{
+	table-layout:fixed;         /* 用于实现表格td自动换行的部分代码*/
+	width: 325px;
+}
+
+#tb tr td{
+	width: 325px;
+	height:30px;
+	font-size: 16px;
+	font-family: Georgia;
+	color: #555555;
+	word-wrap:break-word;   /*自动换行*/
+	padding: 0 0 0 0;
+}
+#tb tr td:hover{
+	background-color: #D9D9D9;
+}
+#info hr{
+	border:1px;
+	width: 325px;
+	margin-bottom: 0px;
+}
+#info{
+	position: absolute;
+	top: 100px;
+	left: 270px;
+	width: 350px;
+	max-height: 250px;           /* 设置最大高度，当高度达到此值时出现滚动条 */
+	z-index: 10;
+	background-color: #E0E5E5;
+	overflow: auto;              /* 自动添加滚动条 */
+	box-shadow:0px 0px 10px #000;   /* 外阴影 */
+	display: none;   /* 默认隐藏 */
+}
+.s{
+				display: block;
+			}
+			.h{
+				display:none;
+			}
+			.left {
+				margin-left: 0px;
+				position: absolute;
+				box-sizing: border-box;
+				width: 200px;
+				height: 100%;
+				background: #4d5e70 bottom;
+				z-index: auto;
+			}
+			
+			
+			.logoTitle {
+				margin-left: 15px;
+				line-height: 1.7;
+			}
+			
+			.menu-title {
+				margin-left: 15px;
+				color: #828e9a;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			
+			.menu-item {
+				padding-left: 15px;
+				line-height: 40px;
+				height: 40px;
+				color: #aab1b7;
+				cursor: pointer;
+			}
+			
+			.menu-item-active {
+				background-color: #3d4e60;
+				border-right: 4px solid #647f9d;
+				color: #fff;
+			}
+			
+			.right {
+				box-sizing: border-box;
+				float: left;
+				box-sizing: border-box;
+				padding-left: 200px;
+				overflow-y: overlay;
+				overflow-x: hidden;
+				clear: both;
+				color: #717592;
+				min-width: 100%;
+				min-height: 500px;
+			}
+			
+			.blank {
+				clear: both;
+				overflow: hidden;
+				display: block;
+				overflow: hidden;
+			}
+			
+			.container {  
+			   display: -webkit-flex;  
+			   -webkit-justify-content: center;  
+			   -webkit-align-items: center;  
+ 			 }
+			

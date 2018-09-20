@@ -1,0 +1,67 @@
+﻿[
+    {
+        "id": 1,
+        "audioname": "郭德纲脱口秀第7期",
+        "ablumname": "郭德纲脱口秀",
+        "ablumzuther": "Admin1",
+        "collect": "已收藏",
+        "creattime": "2018-4-21",
+        "prisenum":"1850",
+        "readtime":"1800",
+        "choiceness":"是",
+        "tags": "摇滚",
+        "reco":1
+    },
+    {
+        "id": 2,
+        "audioname": "郭德纲脱口秀第8期",
+        "ablumname": "郭德纲脱口秀",
+        "ablumzuther": "Admin1",
+        "collect": "已收藏",
+        "creattime": "2018-4-21",
+        "prisenum":"1850",
+        "readtime":"1800",
+        "choiceness":"是",
+        "reco":1,
+        "tags": "摇滚"
+    },
+    {
+        "id": 3,
+        "audioname": "郭德纲脱口秀第9期",
+        "ablumname": "郭德纲脱口秀",
+        "ablumzuther": "Admin1",
+        "collect": "已收藏",
+        "creattime": "2018-4-21",
+        "prisenum":"1850",
+        "readtime":"1800",
+        "choiceness":"是",
+        "reco":1,
+        "tags": "摇滚"
+    },
+    {
+        "id": 4,
+        "audioname": "郭德纲脱口秀第10期",
+        "ablumname": "郭德纲脱口秀",
+        "ablumzuther": "Admin1",
+        "collect": "已收藏",
+        "creattime": "2018-4-21",
+        "prisenum":"1850",
+        "readtime":"1800",
+        "choiceness":"是",
+        "reco":1,
+        "tags": "摇滚"
+    },
+    {
+        "id": 5,
+        "audioname": "郭德纲脱口秀第11期",
+        "ablumname": "郭德纲脱口秀",
+        "ablumzuther": "Admin1",
+        "collect": "已收藏",
+        "creattime": "2018-4-21",
+        "prisenum":"1850",
+        "readtime":"1800",
+        "choiceness":"是",
+        "reco":1,
+        "tags": "摇滚"
+    }
+]

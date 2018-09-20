@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.mapper.AdminMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.Admin">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="last_ip" jdbcType="VARCHAR" property="lastIp"/>
+        <result column="last_time" jdbcType="TIMESTAMP" property="lastTime"/>
+        <result column="passwd" jdbcType="VARCHAR" property="passwd"/>
+        <result column="privilege" jdbcType="VARCHAR" property="privilege"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="contact" jdbcType="VARCHAR" property="contact"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="id" parameterType="com.dao.model.Admin">
+        INSERT INTO
+          admin (
+          passwd,
+          user_name,
+          contact,
+          phone_number,
+          create_time)
+        VALUES  (
+	      #{passwd},
+	      #{userName},
+	      #{contact},
+	      #{phoneNumber},
+	      #{createTime});
+    </insert>
+
+    <select id="findUserInfo" resultMap="BaseResultMap">
+     SELECT * FROM admin as a WHERE user_name = #{userName}
+    </select>
+
+    <select id="selectAuthByUsername" resultMap="BaseResultMap">
+        SELECT * FROM admin as a WHERE a.user_name =#{lowercaseLogin} limit 1
+    </select>
+
+    <select id="findSystemUsers" resultType="com.vo.AccountInfoVo">
+        SELECT
+        a.id as accountId,
+        a.user_name as userAccount,
+        ag.GROUP_NAME as roleName,
+        a.contact as contact,
+        a.phone_number as phoneNumber,
+        ag.ID as roleId
+        FROM
+        admin AS a
+        LEFT JOIN admin_privilege AS ap ON ap.admin_id = a.id
+        LEFT JOIN admin_group AS ag ON ag.ID = ap.group_id
+        <if test="adminId != null and adminId !=0">
+            where
+            a.id = #{adminId}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mapper.EnrollMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.Enroll">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="event_id" property="eventId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findActivitySituation" resultType="com.vo.ActivityParticipateInfo">
+        SELECT
+            e.id as participateId,
+            u.`name` as userName,
+            u.phone_num as phoneNumber,
+            e.remark as remark
+        FROM
+            enroll AS e
+            INNER JOIN `user` AS u ON u.id = e.user_id
+        WHERE
+            e.event_id = #{activityId}
+  </select>
+</mapper>

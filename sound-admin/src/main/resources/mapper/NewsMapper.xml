@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.mapper.NewsMapper">
+    <resultMap id="BaseResultMap" type="com.dao.model.News">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="author_id" property="authorId" jdbcType="BIGINT"/>
+        <result column="author_name" property="authorName" jdbcType="VARCHAR"/>
+        <result column="clo_id" property="cloId" jdbcType="BIGINT"/>
+        <result column="column_name" property="columnName" jdbcType="VARCHAR"/>
+        <result column="comment_count" property="commentCount" jdbcType="BIGINT"/>
+        <result column="content_id" property="contentId" jdbcType="BIGINT"/>
+        <result column="cover_name" property="coverName" jdbcType="VARCHAR"/>
+        <result column="coverurl" property="coverurl" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="praise_count" property="praiseCount" jdbcType="BIGINT"/>
+        <result column="read_count" property="readCount" jdbcType="BIGINT"/>
+        <result column="tag" property="tag" jdbcType="VARCHAR"/>
+        <result column="ticket" property="ticket" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="show_status" property="showStatus" jdbcType="BIT"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="summary" property="summary" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <select id="findNewsList" resultType="com.vo.NewsInfo">
+      SELECT
+          id as newsId,
+          title as title,
+          author_name as publisher,
+          show_status as showStatus,
+          create_time as releaseTime,
+          praise_count as likeCount
+      FROM
+          news
+      ORDER BY
+          create_time DESC
+  </select>
+</mapper>
