@@ -7,6 +7,8 @@ public enum ParamCode{
 	 SUCSESS("000000","Operation succeeded"),
 	
 	 FAIL("000100","Operation failed"),
+	 
+	 PASSWORDFAIL("000300","Password failed"),
 	
 	 PARAMERROR("000200","Param error"),
 	

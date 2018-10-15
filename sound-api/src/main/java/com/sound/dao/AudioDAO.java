@@ -43,10 +43,13 @@ public interface AudioDAO extends JpaRepository<AudioModel,Long>{
 	public List<AudioModel> findAudioPriority();
 	@Query("select a from audio a where a.roadShow=4 and a.showStatus=1 and a.isRoadShow=2")
 	public List<AudioModel> findAudioRoadShow();
-	@Query("select a from audio a where a.albumId=?1 and a.showStatus=1")
+	@Query("select a from audio a where a.albumId=?1 and a.showStatus=1 order by a.id ASC")
 	public List<AudioModel> findAudioByAlbumId(long id);
 	@Query("select a from audio a where a.bigAlbumId=?1 and a.showStatus=1")
 	public List<AudioModel> findAudioByBigAlbumId(long id);
 	
+	@Query("select u from audio u where u.albumId=:albumId")
+	@Modifying
+	public List<AudioModel> findByAlbumId(@Param("albumId") Long albumId);
 }
 

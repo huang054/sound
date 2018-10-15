@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sound.common.ParamCode;
 import com.sound.common.Response;
+import com.sound.dao.DeviceDAO;
 import com.sound.model.AudioModel;
 import com.sound.model.CucrrencyRecord;
 import com.sound.model.Currency;
@@ -72,6 +73,8 @@ public class Consumer {
 	private CurrencyWaterService currencyWaterService;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private DeviceDAO deviceDAO;
 	@Value("${postUrl1}")
     private String postUrl;
 	/*@JmsListener(destination = "sample.queue")
@@ -92,10 +95,10 @@ public class Consumer {
 	
 		PlayTime playT = (PlayTime) JSON.parseObject(playMessage, PlayTime.class); 
 		//Response res = new Response();
-		String userPhoneNum=playT.getUserId();
+		String userPhoneNum=deviceDAO.findDeviceById(playT.getUserId()).getUserId();
 		String audioId=playT.getAudioId();
-		String playTime=playT.getTime();
-		UserModel user = userService.findByUserName(userPhoneNum);
+		String playTime=String.valueOf(Integer.parseInt(playT.getTime())/1000);
+		UserModel user = userService.findById(Long.parseLong(userPhoneNum));
 	    AudioModel audio = audioService.findById(Long.parseLong(audioId));	
 	  
 	    PlayRecord playRecord=playService.find(user.getId(), Long.parseLong(audioId));
@@ -238,10 +241,10 @@ public class Consumer {
 		System.out.println( "play.queue");
 		PlayTime playT = (PlayTime) JSON.parseObject(playMessage, PlayTime.class); 
 		Response res = new Response();
-		String userPhoneNum=playT.getUserId();
+		String userPhoneNum=deviceDAO.findDeviceById(playT.getUserId()).getUserId();
 		String audioId=playT.getAudioId();
-		String playTime=playT.getTime();
-		 UserModel user = userService.findByUserName(userPhoneNum);
+		String playTime=String.valueOf(Integer.parseInt(playT.getTime())/1000);
+		UserModel user = userService.findById(Long.parseLong(userPhoneNum));
 		 DailyTask daily = dailyTaskService.findDailyTaskByUserId(user.getId());
 		 AudioModel audio = audioService.findById(Long.parseLong(audioId));
 		if(null!=audioId&&!audioId.trim().equals("")) {

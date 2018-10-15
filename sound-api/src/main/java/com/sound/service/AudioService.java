@@ -7,7 +7,7 @@ import com.sound.model.AudioModel;
 import com.sound.model.Banner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +38,10 @@ public class AudioService extends BaseService<AudioModel>{
 		return audioDao.search(search);
 	}
 	
+	public List<AudioModel> findByAlbumId(@Param("albumId") Long albumId){
+
+		return audioDao.findByAlbumId(albumId);
+	}
 	public List<Banner> findBanner() {
 		return audioDao.findBanner();
 	}

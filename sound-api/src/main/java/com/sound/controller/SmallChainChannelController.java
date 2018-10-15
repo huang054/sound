@@ -2,6 +2,8 @@ package com.sound.controller;
 
 import java.awt.print.Pageable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -133,6 +135,7 @@ public class SmallChainChannelController extends BaseController<AudioModel> {
 		audioModel.setAlbumId(albumId);
 		// Iterable<AudioModel>=super.findAll(audioModel);
 		List<AudioModel> audios = audioService.findAudioByAlbumId(albumId);
+		//Collections.sort(audios, Comparator.comparing(AudioModel::getId));
 		logger.info("小链频道专辑查找所有音频接口"+audios.toString());
 		logger.info("专辑是否收藏"+b);
 		map.put("isCollection", b);
@@ -469,6 +472,8 @@ public class SmallChainChannelController extends BaseController<AudioModel> {
 			ids.add(Long.valueOf(id));
 		}
 
+		
+
 		// UserModel user = redisService.getUserInfo(req);
 		UserModel user = redisService.getUserInfo(req);
 		// 验证登陆态
@@ -489,9 +494,11 @@ public class SmallChainChannelController extends BaseController<AudioModel> {
 				
 				audioModel.setPlayCount(audioModel.getPlayCount() + 1);
 				RecentAudioModel model1 = new RecentAudioModel();
-				model1.setUserId(user.getPhoneNum());
+				model1.setUserId(String.valueOf(user.getId()));
 				model1.setAudioId(ids.get(i));
-				List<RecentAudioModel> list = recentAudioService.findAll(model1);// 只有一条
+				if(i+1==index)
+				audioService.save(audioModel);
+			/*	List<RecentAudioModel> list = recentAudioService.findAll(model1);// 只有一条
 				if(null==list||list.size()==0) {
 					model1.setPlaydate(new Date());
 					recentAudioService.save(model1);
@@ -500,21 +507,22 @@ public class SmallChainChannelController extends BaseController<AudioModel> {
 					each.setPlaydate(new Date());
 					recentAudioService.save(each);
 				}
-
+*/
 			}
 
 			Iterable<AudioModel> audioModels = this.service.findAllById(ids);
+			
 			String body = restTemplate.postForObject(nettyServerURL + "/remote/play/{userId}/{deviceId}/{opCode}/{index}",
 					audioModels, String.class, user.getPhoneNum(), deviceId, opCode,index);
 			// 入库最近专辑和最近音频
 			if (ids.size() > 0) {
-				AudioModel audioModel = audioService.findById(ids.get(0));
+				/*AudioModel audioModel = audioService.findById(ids.get(0));
 				if (audioModel != null) {
 					RecentAlbumModel recentAlbumModel = new RecentAlbumModel();
 					recentAlbumModel.setUserId(user.getPhoneNum());
 					recentAlbumModel.setAlbumId(audioModel.getAlbumId());
-					recentAlbumService.save(recentAlbumModel);
-				}
+					//recentAlbumService.save(recentAlbumModel);
+				}*/
 
 			}
 			if (!"000".equals(body)) {

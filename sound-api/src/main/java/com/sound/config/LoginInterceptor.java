@@ -29,6 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Response<Boolean> resp = new Response<>();
+        
         String ss = BaseController.getCookieByName(request);
         if(!redisService.isLogin(request)){
             resp.setRespone(ParamCode.NOLOGIN);

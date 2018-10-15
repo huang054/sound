@@ -1,6 +1,8 @@
 package com.sound.controller;
 
 import java.text.ParseException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -265,6 +267,7 @@ public class SmallChainCommunity extends BaseController<CommunityBanner> {
 		try {
 			Album album = albumService.findById(id);
 			List<AudioModel> audios = audioService.findAudioByBigAlbumId(id);
+			//Collections.sort(audios, Comparator.comparing(AudioModel::getId));
 			map.put("album", album);
 			map.put("audio", audios);
 			logger.info("社区大V专辑详情接口频道"+album.toString());

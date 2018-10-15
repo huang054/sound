@@ -44,7 +44,9 @@ public class RedisService {
      */
     public boolean isLogin(HttpServletRequest request){
         String key = BaseController.getCookieByName(request);
-       
+       if(null==key) {
+    	   return false;
+       }
         UserModel userModel = (UserModel) JSON.parseObject(stringRedisTemplate.opsForValue().get(key), UserModel.class);  
        // UserModel userModel = (UserModel) SerializeUtil.unserialize(redisTemplate.opsForValue().get(key));
 

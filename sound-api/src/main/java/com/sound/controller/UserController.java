@@ -16,6 +16,7 @@ import com.sound.model.AudioModel;
 import com.sound.model.CucrrencyRecord;
 import com.sound.model.DailyTask;
 import com.sound.model.Label;
+import com.sound.model.PaymentPassword;
 import com.sound.model.PaymentsRecords;
 import com.sound.model.UserModel;
 
@@ -24,6 +25,7 @@ import com.sound.service.CucrrencyRecordService;
 import com.sound.service.DailyTaskService;
 import com.sound.service.LabelService;
 import com.sound.service.NickNameService;
+import com.sound.service.PaymentPasswordService;
 import com.sound.service.PaymentsRecordsService;
 import com.sound.service.RedisService;
 import com.sound.service.UserService;
@@ -96,6 +98,8 @@ public class UserController extends BaseController<UserModel> {
 	@Autowired
 	private UserService userSevice;
 
+	@Autowired
+	private PaymentPasswordService paymentPasswordService;
 	@Autowired
 	private GitHubLookupService git;
 	@Autowired
@@ -1411,7 +1415,7 @@ public class UserController extends BaseController<UserModel> {
 	 */
 	@ApiOperation(value = "用户提现")
 	@PostMapping(path = "/raiseMoney.do")
-	public Response raiseMoney(HttpServletRequest req,String raiseMoneyUrl,String amountStr,String symbol) {
+	public Response raiseMoney(HttpServletRequest req,String raiseMoneyUrl,String amountStr,String symbol,String password) {
 		Response res = new Response();
 		Map<String, Object> map = new HashMap<String, Object>();
 		MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<String, Object>();
@@ -1422,7 +1426,12 @@ public class UserController extends BaseController<UserModel> {
 			res.setMsg("用户请登录！");
 			return res;
 		}
-	
+		PaymentPassword p = paymentPasswordService.findPaymentPasswordByuserId(userModel.getId());
+		if(!p.getPaymentPassword().equals(password.trim())) {
+			res.setRespone(ParamCode.PASSWORDFAIL);
+			res.setMsg("支付密码错误");
+			return res;
+		}
 		if(new BigDecimal(amountStr).compareTo(new BigDecimal("0.01"))==-1) {
 			res.setRespone(ParamCode.FAIL);
 			res.setMsg("体现的金额小于手续费");

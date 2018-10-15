@@ -216,10 +216,11 @@ public class DeviceController extends BaseController<Device> {
 	 * @return
 	 */
 	@GetMapping(path = "deviceBindById.do")
-	public Response<Void> deviceBindById(@RequestParam("phoneNum") String phoneNum,
+	public Response deviceBindById(@RequestParam("phoneNum") String phoneNum,
 			@RequestParam("deviceId") String deviceId, @RequestParam("opCode") String opCode,
 			@RequestParam("opConn") String opConn) {
-		Response<Void> resp = new Response<Void>();
+		
+		Response resp = new Response();
 		Device dev = deviceService.findDeviceById(deviceId);
 		UserModel user = userService.findByUserName(phoneNum);
 		if (user == null) {
@@ -254,14 +255,17 @@ public class DeviceController extends BaseController<Device> {
 			device.setStatus(true);
 			device.setVersion("v1.0");
 			device.setCreateTime(new Date());
-			deviceService.save(device);
+			Device de=deviceService.save(device);
+			resp.setData(de.getId());
 			resp.setMsg("添加成功");
 			resp.setRespone(ParamCode.SUCSESS);
 			return resp;
 		} else {
 			dev.setUserId(user.getId().toString());
 			dev.setCreateTime(new Date());
-			deviceService.save(dev);
+			Device de=deviceService.save(dev);
+			
+			resp.setData(de.getId());
 			resp.setRespone(ParamCode.SUCSESS);
 			return resp;
 		}
